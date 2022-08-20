@@ -1,0 +1,13 @@
+{
+  "users": [
+    {
+      "username": "asd1",
+      "password": "asd1",
+      "id": 1
+    }
+  ],
+  "events": [],
+  "comments": [],
+  "event-like": [],
+  "comment-like": []
+}

@@ -1,25 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
+import { useEffect } from 'react';
+import { Container, ThemeProvider } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 import './App.css';
+import AppNavbar from './components/AppNavbar';
+import AppRouter from './components/AppRouter';
+import { useActions } from './hooks/useActions';
+import { useAppSelector } from './hooks/useTypedSelector';
+import { IUser } from './models/IUser';
 
 function App() {
+  const { setIsAuth, setUser } = useActions();
+  useEffect(() => {
+    const username = localStorage.getItem("username");
+    const isAuth = localStorage.getItem("isAuth");
+    if (username && isAuth) {
+      setIsAuth(true);
+      setUser({ username } as IUser);
+    }
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider
+      breakpoints={['xxxl', 'xxl', 'xl', 'lg', 'md', 'sm', 'xs', 'xxs']}
+      minBreakpoint="xxs"
+    >
+      <AppNavbar />
+      <Container>
+        <AppRouter />
+      </Container>
+    </ThemeProvider>
   );
 }
 

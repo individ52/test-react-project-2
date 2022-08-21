@@ -1,0 +1,191 @@
+@use postcss-preset-env;
+
+/* ---------- FONTAWESOME ---------- */
+/* ---------- https://fortawesome.github.com/Font-Awesome/ ---------- */
+/* ---------- http://weloveiconfonts.com/ ---------- */
+
+@import url(https://weloveiconfonts.com/api/?family=fontawesome);
+
+
+
+
+/* ---------- CALENDAR ---------- */
+
+.pulse {
+    position: relative;
+}
+
+.pulse:hover::before,
+.pulse:hover::after {
+    content: '';
+    position: absolute;
+    left: -20px;
+    right: -20px;
+    top: -20px;
+    bottom: -20px;
+    border-radius: 75%;
+    animation: pulse 1s linear infinite;
+    opacity: 0;
+}
+
+.pulse:hover::after {
+    animation-delay: .5s;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1.2);
+        opacity: 0;
+    }
+}
+
+.calendar tbody td,
+.calendar tbody td::before,
+.calendar tbody td::after {
+    border: 1px solid #00addf;
+}
+
+.calendar .prev-month,
+.calendar .prev-month::before,
+.calendar .prev-month::after,
+.calendar .next-month,
+.calendar .next-month::after,
+.calendar .next-month::before {
+    border: 1px solid #cbd1d2;
+}
+
+
+.calendar {
+    text-align: center;
+    width: 100%;
+}
+
+.calendar table {
+    text-align: center;
+    width: 100%;
+}
+
+.calendar header {
+    position: relative;
+}
+
+.calendar h2 {
+    text-transform: uppercase;
+}
+
+.calendar thead {
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.calendar tbody {
+    color: #7c8a95;
+}
+
+
+
+
+i {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 5px;
+    position: absolute;
+    top: 32%;
+    right: 28%;
+}
+
+.left {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
+
+.right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+
+.calendar td {
+    border: 2px solid transparent;
+    border-radius: 50%;
+    display: inline-block;
+    height: 4em;
+    line-height: 4em;
+    text-align: center;
+    font-size: 17px;
+    width: 4em;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.calendar .prev-month,
+.calendar .next-month {
+    color: #cbd1d2;
+}
+
+
+
+.current-day {
+    background: #00addf;
+    color: #f9f9f9;
+}
+
+.event {
+    cursor: pointer;
+    position: relative;
+}
+
+.event:after {
+    background: #00addf;
+    border-radius: 50%;
+    bottom: .5em;
+    display: block;
+    content: '';
+    height: .5em;
+    left: 50%;
+    margin: -.25em 0 0 -.25em;
+    position: absolute;
+    width: .5em;
+}
+
+.event.current-day:after {
+    background: #f9f9f9;
+}
+
+.btn-prev,
+.btn-next {
+    border: 2px solid #cbd1d2;
+    cursor: pointer;
+    border-radius: 50%;
+    color: #cbd1d2;
+    height: 3em;
+    width: 3em;
+    font-size: .75em;
+    line-height: 2em;
+    margin: -1em;
+    position: absolute;
+    top: 50%;
+}
+
+.btn-prev:hover,
+.btn-next:hover {
+    background: #cbd1d2;
+    color: #f9f9f9;
+}
+
+.btn-prev {
+    left: 6em;
+}
+
+.btn-next {
+    right: 6em;
+}

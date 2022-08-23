@@ -1,0 +1,42 @@
+.popup-parent {
+    position: relative;
+}
+
+.popup-box {
+    background-color: rgb(56, 56, 56);
+    opacity: 0;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(98%, -64%);
+    transition: opacity .25s ease-in-out;
+    height: 130px;
+    height: 110px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+
+    &-show {
+        opacity: 1;
+    }
+
+    p {
+        text-align: center;
+    }
+
+    &:before {
+        position: absolute;
+        z-index: -1;
+        content: "";
+        bottom: 3px;
+        right: 98%;
+        width: 10px;
+        height: 20px;
+        border-right: solid 15px rgb(56, 56, 56);
+        border-bottom: solid 15px transparent;
+        border-top: solid 15px transparent;
+    }
+}

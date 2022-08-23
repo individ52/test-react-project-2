@@ -1,0 +1,11 @@
+.calendar-sidebar {
+    border: 2px solid lightgray;
+    border-radius: 20px;
+    padding: 20px;
+    height: 600px;
+}
+
+.calendar-events-wrap {
+    overflow-y: scroll;
+    height: 79%;
+}

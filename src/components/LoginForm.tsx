@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Button, Form, InputGroup, Row } from 'react-bootstrap';
 import FormWrap from './FormWrap';
 import { useActions } from '../hooks/useActions';
+import { useAppSelector } from '../hooks/useTypedSelector';
 
 interface LoginFormProps {
 
@@ -26,8 +27,10 @@ const LoginForm: FC<LoginFormProps> = ({ }) => {
         login(formUser.username, formUser.password);
     }
 
+    const { error, isLoading, success } = useAppSelector(state => state.auth);
+
     return (
-        <FormWrap onSubmitAction={onSubmit}>
+        <FormWrap onSubmitAction={onSubmit} error={error} isLoading={isLoading} success={success}>
             <Row className="mb-3">
                 <Form.Group as={Col} controlId="validationCustom01">
                     <Form.Label>Username</Form.Label>

@@ -1,0 +1,18 @@
+.plus {
+    margin: 0 !important;
+    padding: 0;
+    display: inline-block;
+    transition: 0.2s ease-in-out;
+    margin: auto;
+    opacity: 0.6;
+    transform: rotate(45deg) scale(1);
+    width: 30px;
+    height: 30px;
+    // background-color: coral;
+    cursor: pointer;
+
+    &:hover {
+        opacity: 0.9;
+        transform: rotate(-45deg) scale(1.1);
+    }
+}

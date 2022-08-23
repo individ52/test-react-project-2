@@ -1,0 +1,12 @@
+.event-item {
+    width: 100%;
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid lightgray;
+    margin: 10px 0;
+}
+
+.event-item hr {
+    width: 40%;
+    margin: 0;
+}

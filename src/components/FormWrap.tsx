@@ -5,6 +5,9 @@ import { useAppSelector } from '../hooks/useTypedSelector';
 interface FormWrapProps {
     children: React.ReactNode;
     onSubmitAction: () => void;
+    error: string;
+    success: string;
+    isLoading: boolean;
 }
 
 interface alertData {
@@ -12,13 +15,12 @@ interface alertData {
     message: string;
 }
 
-const FormWrap: FC<FormWrapProps> = ({ children, onSubmitAction }) => {
+const FormWrap: FC<FormWrapProps> = ({ children, onSubmitAction, isLoading, error, success }) => {
 
     const [validated, setValidated] = useState(false);
 
     const [alertData, setAlertData] = useState({ variant: "secondary", message: "" } as alertData);
 
-    const { isLoading, error, success } = useAppSelector(state => state.auth);
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         const form = event.currentTarget;
@@ -57,8 +59,6 @@ const FormWrap: FC<FormWrapProps> = ({ children, onSubmitAction }) => {
     return (
         <Form noValidate validated={validated} onSubmit={handleSubmit}>
             {alertData.message !== "" && <Alert key={alertData.variant} variant={alertData.variant} className="mt-3">{alertData.message}</Alert>}
-
-
             {children}
         </Form>
     )

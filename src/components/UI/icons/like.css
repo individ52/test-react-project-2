@@ -1,0 +1,54 @@
+:root {
+    --heart: #f43965;
+}
+
+.like {
+    cursor: pointer;
+    display: inline-block;
+}
+
+.like svg use {
+    fill: transparent;
+    stroke: rgba(157, 157, 157, 0.7);
+    stroke-width: 1.2;
+    transition: all 0.33s ease;
+    width: 100%;
+}
+
+.like svg use:last-child {
+    fill: var(--heart);
+    stroke: var(--heart);
+    opacity: 0;
+    transform: scale(.33);
+    transform-origin: center;
+}
+
+.like.on svg use {
+    stroke: transparent;
+}
+
+.like.on svg use:last-child {
+    opacity: 1;
+    transform: none;
+    transition: all 0.5s cubic-bezier(.19, 2.41, .45, .94);
+}
+
+.like svg {
+    width: max(30px, 1vw);
+    height: max(30px, 1vw);
+    overflow: visible !important;
+}
+
+.hide {
+    display: none;
+}
+
+@keyframes in-animation {   
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}

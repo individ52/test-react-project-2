@@ -1,4 +1,6 @@
 import React, { FC, useState, useEffect, useMemo } from 'react';
+import { useActions } from '../../hooks/useActions';
+import { formateDate } from '../../utils/date';
 import { DayStatusEnum, getDaysByMonth, getMonthName, IDay } from '../../utils/month';
 import "./Calendar.css";
 interface CalendartProps {
@@ -8,11 +10,15 @@ interface CalendartProps {
 const Calendar: FC<CalendartProps> = ({ }) => {
     const [days, setDays] = useState<IDay[][]>([]);
     const [curDate, setCurDate] = useState<{ month: number, year: number, name: string }>();
-    const [curDay, setCurDay] = useState<{ num: number, name: string }>();
+    const [curDay, setCurDay] = useState<IDay>();
+
+    const { fetchEvents, setDate } = useActions();
+
 
     useEffect(() => {
-        // const today = new Date(2022, 9, 17);
         const today = new Date();
+        setCurDay({ date: today, status: DayStatusEnum.cur, today: true });
+        setDate(formateDate(today));
         updateCurDate(today);
     }, []);
 
@@ -44,7 +50,13 @@ const Calendar: FC<CalendartProps> = ({ }) => {
         }
     }, [curDate]);
 
-    return (
+    useMemo(async () => {
+        if (curDay && curDay.date) {
+            setDate(formateDate(curDay.date));
+        }
+    }, [curDay]);
+
+    return (    
         <div className="container">
             <div className="calendar">
                 <header>
@@ -69,13 +81,25 @@ const Calendar: FC<CalendartProps> = ({ }) => {
                             return (
                                 <tr key={i}>
                                     {row.map(day => {
+                                        const classes = ["pulse"];
+
+                                        if (day.today) classes.push("today");
+                                        if (day.date.toLocaleDateString("en-US") === curDay?.date.toLocaleDateString("en-US")) classes.push("current-day");
+
                                         if (day.status === DayStatusEnum.prev) {
-                                            return (<td key={day.date.getDate()} className={`prev-month pulse ${(day.today ? "current-day" : "")}`}>{day.date.getDate()}</td>);
+                                            classes.push("prev-month");
                                         } else if (day.status === DayStatusEnum.next) {
-                                            return (<td key={day.date.getDate()} className={`next-month pulse ${(day.today ? "current-day" : "")}`}>{day.date.getDate()}</td>);
-                                        } else {
-                                            return (<td key={day.date.getDate()} className={`pulse ${(day.today ? "current-day" : "")}`}>{day.date.getDate()}</td>);
+                                            classes.push("next-month");
                                         }
+
+                                        return (
+                                            <td
+                                                key={day.date.getDate()}
+                                                onClick={() => setCurDay(day)}
+                                                className={classes.join(" ")}>
+                                                {day.date.getDate()}
+                                            </td>);
+
                                     })}
                                 </tr>
                             )

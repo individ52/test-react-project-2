@@ -5,6 +5,7 @@ import { Button, Form, InputGroup, Row } from 'react-bootstrap';
 import FormWrap from './FormWrap';
 import { IFormUser } from '../pages/LoginPage';
 import { useActions } from '../hooks/useActions';
+import { useAppSelector } from '../hooks/useTypedSelector';
 
 interface RegFormProps {
 
@@ -16,6 +17,7 @@ const RegForm: FC<RegFormProps> = ({ }) => {
         username: ""
     } as IFormUser);
 
+    const { error, isLoading, success } = useAppSelector(state => state.auth);
     const { register } = useActions();
 
     const onSubmit = () => {
@@ -23,7 +25,7 @@ const RegForm: FC<RegFormProps> = ({ }) => {
     }
 
     return (
-        <FormWrap onSubmitAction={onSubmit}>
+        <FormWrap onSubmitAction={onSubmit} error={error} isLoading={isLoading} success={success}>
             <Row className="mb-3">
                 <Form.Group as={Col} controlId="validationCustom01">
                     <Form.Label>Email</Form.Label>

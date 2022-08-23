@@ -4,10 +4,69 @@
       "username": "Leonid",
       "password": "123",
       "id": 1
+    },
+    {
+      "username": "leo",
+      "password": "123",
+      "id": 2
+    },
+    {
+      "id": -1,
+      "authorUsername": "leo",
+      "date": "8/22/2022",
+      "description": "Event descr",
+      "title": "Event "
     }
   ],
-  "events": [],
+  "followers": [],
+  "events": [
+    {
+      "authorUsername": "Leonid",
+      "date": "8/22/2022",
+      "description": "...",
+      "title": "Event 1",
+      "id": 1
+    },
+    {
+      "authorUsername": "Leonid",
+      "date": "8/23/2022",
+      "description": "...",
+      "title": "Event 2",
+      "id": 2
+    },
+    {
+      "authorUsername": "Leonid",
+      "date": "8/22/2022",
+      "description": "...",
+      "title": "Event 3",
+      "id": 3
+    },
+    {
+      "authorUsername": "Leonid",
+      "date": "8/15/2022",
+      "description": "Event old 2",
+      "title": "Event old 2",
+      "id": 4
+    }
+  ],
   "comments": [],
-  "event-like": [],
-  "comment-like": []
+  "event-like": [
+    {
+      "eventId": 3,
+      "username": "Leonid",
+      "id": 2
+    },
+    {
+      "eventId": 2,
+      "username": "Leonid",
+      "id": 3
+    },
+    {
+      "eventId": 4,
+      "username": "Leonid",
+      "id": 4
+    }
+  ],
+  "comment-like": [],
+  "event-follower": []
 }

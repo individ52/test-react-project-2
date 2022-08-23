@@ -16,7 +16,9 @@
 }
 
 .pulse:hover::before,
-.pulse:hover::after {
+.pulse:hover::after,
+.current-day.pulse::before,
+.current-day.pulse::after {
     content: '';
     position: absolute;
     left: -20px;
@@ -28,8 +30,9 @@
     opacity: 0;
 }
 
-.pulse:hover::after {
-    animation-delay: .5s;
+.pulse:hover::after,
+.pulse::after {
+    animation-delay: .5s !important;
 }
 
 @keyframes pulse {
@@ -50,6 +53,8 @@
 
 .calendar tbody td,
 .calendar tbody td::before,
+.current-day::before,
+.current-day::after,
 .calendar tbody td::after {
     border: 1px solid #00addf;
 }
@@ -132,6 +137,18 @@ i {
     color: #cbd1d2;
 }
 
+
+
+.current-day.today {
+    background-color: orange !important;
+    color: #f9f9f9;
+}
+
+.today,
+.today::before,
+.today::after {
+    border: 1px solid orange !important;
+}
 
 
 .current-day {

@@ -8,9 +8,9 @@ import { IComment } from '../../models/IComment';
 import { IEvent } from '../../models/IEvent';
 import { IEventLike } from '../../models/IEventLike';
 import { IFollower } from '../../models/IFollower';
-import Comment from '../UI/icons/Comment';
-import FollowerIcon from '../UI/icons/followers';
-import Like from '../UI/icons/Like';
+import Comment from '../UI/icons/Comment/Comment';
+import FollowerIcon from '../UI/icons/Followers/followers';
+import Like from '../UI/icons/Like/Like';
 import "./Event.css";
 interface EventItemProps {
     event: IEvent;
@@ -28,6 +28,8 @@ const EventItem: FC<EventItemProps> = ({ event }) => {
     const fetchEventFollowers = useFetchEventFollowers(event.id);
     const addLike = useAddEventLike(event.id, user.username);
     const removeLike = useRemoveEventLike(event.id, user.username);
+
+    const { setEvent } = useActions();
 
     const updateLike = async () => {
         if (liked) await removeLike();
@@ -52,9 +54,16 @@ const EventItem: FC<EventItemProps> = ({ event }) => {
         if (userLike) return true;
         return false;
     }
+
+    const setCurEvent = () => {
+        setEvent(event);
+    }
+
     useMemo(() => {
         setLiked(isLiked());
     }, [likes]);
+
+
 
     useEffect(() => {
         // console.log(event.title, " => loaded");
@@ -75,7 +84,7 @@ const EventItem: FC<EventItemProps> = ({ event }) => {
             </div>
             <hr />
             <div className='d-flex justify-content-between event-item-body m-0'>
-                <div className=""><h4>{event.title}</h4></div>
+                <div onClick={setCurEvent}><h4>{event.title}</h4></div>
             </div>
         </div>
     )

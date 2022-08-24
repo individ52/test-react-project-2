@@ -10,3 +10,64 @@
     width: 40%;
     margin: 0;
 }
+
+.full-event {
+    padding: 20px;
+    transform: translate(100%);
+    transition: 1s all;
+}
+
+.active-full-event {
+    transform: translate(0);
+}
+
+.full-event hr {
+    width: 80%;
+    margin: 0 auto;
+    height: 4px;
+    background-color: rgb(153, 153, 153);
+    border: 1px solid lightgray;
+}
+
+.full-event .author {
+    text-align: end;
+    margin-right: 20px;
+    font-style: italic;
+    font-size: 20px;
+}
+
+.event-arrow-back {
+    height: 1em;
+    width: 1em;
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+    position: absolute;
+    top: 37px;
+    left: 35px;
+    cursor: pointer;
+}
+
+.event-arrow-back .main:hover {
+    opacity: 1;
+    animation: arrowNext 1s infinite;
+}
+
+@keyframes arrowNext {
+    0% {
+        opacity: 0;
+        right: 5px;
+        top: 5px;
+    }
+
+    20% {
+        opacity: 1;
+        right: 5px;
+        top: 5px;
+    }
+
+    100% {
+        opacity: 0;
+        right: -4px;
+        top: 13px;
+    }
+}

@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import "./like.css";
-import PopupBox from './PopupBox';
+import PopupBox from '../Popup/PopupBox';
 export interface SocialIconProps {
     active?: boolean;
     onClick?: () => void;

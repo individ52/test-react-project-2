@@ -65,6 +65,11 @@
       "eventId": 4,
       "username": "Leonid",
       "id": 4
+    },
+    {
+      "eventId": 1,
+      "username": "Leonid",
+      "id": 5
     }
   ],
   "comment-like": [],

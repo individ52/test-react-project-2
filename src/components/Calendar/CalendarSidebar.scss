@@ -9,3 +9,16 @@
     overflow-y: scroll;
     height: 79%;
 }
+
+
+.calendar-events {
+    transform: scale(0);
+    opacity: 0;
+    transition: 1s all;
+}
+
+.calendar-events-show {
+    transform: scale(1);
+    opacity: 1;
+    transition: 1s all;
+}

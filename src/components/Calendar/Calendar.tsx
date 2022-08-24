@@ -1,5 +1,6 @@
 import React, { FC, useState, useEffect, useMemo } from 'react';
 import { useActions } from '../../hooks/useActions';
+import { IEvent } from '../../models/IEvent';
 import { formateDate } from '../../utils/date';
 import { DayStatusEnum, getDaysByMonth, getMonthName, IDay } from '../../utils/month';
 import "./Calendar.css";
@@ -12,7 +13,7 @@ const Calendar: FC<CalendartProps> = ({ }) => {
     const [curDate, setCurDate] = useState<{ month: number, year: number, name: string }>();
     const [curDay, setCurDay] = useState<IDay>();
 
-    const { fetchEvents, setDate } = useActions();
+    const { fetchEvents, setDate, setEvent } = useActions();
 
 
     useEffect(() => {
@@ -53,10 +54,11 @@ const Calendar: FC<CalendartProps> = ({ }) => {
     useMemo(async () => {
         if (curDay && curDay.date) {
             setDate(formateDate(curDay.date));
+            setEvent({} as IEvent);
         }
     }, [curDay]);
 
-    return (    
+    return (
         <div className="container">
             <div className="calendar">
                 <header>

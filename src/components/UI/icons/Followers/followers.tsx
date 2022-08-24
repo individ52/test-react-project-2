@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import "./comment.scss";
-import { SocialIconProps } from './Like';
+import "./followers.css";
+import { SocialIconProps } from '../Like/Like';
 
 
 

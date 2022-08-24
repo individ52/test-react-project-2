@@ -5,6 +5,7 @@ import { useAppSelector } from '../../hooks/useTypedSelector';
 import { IEvent } from '../../models/IEvent';
 import { formateDate, getDateFromString } from '../../utils/date';
 import EventItem from '../Event/EventItem';
+import FullEventItem from '../Event/FullEventItem';
 import FormWrap from '../FormWrap';
 import Loader from '../UI/Loader/Loader';
 import "./CalendarSidebar.scss";
@@ -13,7 +14,7 @@ interface CalendarSidebarProps {
 }
 
 const CalendarSidebar: FC<CalendarSidebarProps> = ({ }) => {
-    const { dateEvents, date, error, success, isLoadingEvent } = useAppSelector(state => state.event);
+    const { dateEvents, date, error, success, isLoadingEvent, event: curEvent } = useAppSelector(state => state.event);
     const { user } = useAppSelector(state => state.auth);
     const [addModal, setAddModal] = useState<boolean>(false);
     const [formEvent, setFormEvent] = useState<IEvent>({} as IEvent);
@@ -70,10 +71,15 @@ const CalendarSidebar: FC<CalendarSidebarProps> = ({ }) => {
             <button className='btn btn-outline-secondary w-100 fs-4' onClick={openAddModal}>Add new Event</button>
             <div className='calendar-events-wrap'>
                 {isLoadingEvent && <Loader />}
-                {!isLoadingEvent && dateEvents.length
-                    ? dateEvents.map(event => <EventItem event={event} />)
-                    : <h3>No events</h3>
-                }
+                <div className={["calendar-events", curEvent.id ? "" : "calendar-events-show"].join(" ")}>
+                    {!isLoadingEvent && dateEvents.length && !curEvent.id
+                        ? dateEvents.map(event => <EventItem event={event} />)
+                        : !curEvent.id && <h3>No events</h3>
+                    }
+                </div>
+                <div className="calendar-event">
+                    {curEvent.id && <FullEventItem />}
+                </div>
             </div>
             <Modal show={addModal} onHide={closeAddModal} aria-labelledby="contained-modal-title-vcenter" centered size="lg" >
                 <Modal.Header closeButton >

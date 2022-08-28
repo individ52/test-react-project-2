@@ -34,11 +34,11 @@ const CalendarSidebar: FC<CalendarSidebarProps> = ({ }) => {
     }, [date])
 
     useMemo(() => {
-        console.log("dateEvents is updated: ", dateEvents);
+        // console.log("dateEvents is updated: ", dateEvents);
     }, [dateEvents]);
 
     useMemo(() => {
-        console.log("isLoading", isLoadingEvent)
+        // console.log("isLoading", isLoadingEvent)
     }, [isLoadingEvent]);
 
     const closeAddModal = () => {

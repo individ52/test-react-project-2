@@ -10,6 +10,7 @@ export interface EventState {
     followers: IFollower[],
     success: string,
     isLoadingEvent: boolean,
+    isLiked: boolean,
     error: string,
 
 }
@@ -21,6 +22,7 @@ export enum EventActionEnum {
     SET_FOLLOWERS = "SET_FOLLOWERS",
     SET_SUCCESS = "SET_SUCCESS",
     SET_IS_LOADING_EVENT = "SET_IS_LOADING_EVENT",
+    SET_IS_LIKED = "SET_IS_LIKED",
     SET_ERROR = "SET_ERROR"
 }
 
@@ -59,6 +61,10 @@ export interface SetIsLoadingEventAction {
     type: EventActionEnum.SET_IS_LOADING_EVENT,
     payload: boolean
 }
+export interface SetIsLikedAction {
+    type: EventActionEnum.SET_IS_LIKED,
+    payload: boolean
+}
 
 
 export type EventActions = SetEventAction |
@@ -67,4 +73,5 @@ export type EventActions = SetEventAction |
     SetFollowersAction |
     SetSuccessAction |
     SetErrorAction |
+    SetIsLikedAction |
     SetIsLoadingEventAction

@@ -105,12 +105,17 @@
     {
       "eventId": 6,
       "username": "Leonid",
-      "id": 11
+      "id": 8
+    },
+    {
+      "eventId": 5,
+      "username": "Leonid",
+      "id": 9
     },
     {
       "eventId": 7,
       "username": "Leonid",
-      "id": 12
+      "id": 10
     }
   ],
   "comment-like": [],

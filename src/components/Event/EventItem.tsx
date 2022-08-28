@@ -1,6 +1,6 @@
 import React, { FC, useState, useEffect, useMemo } from 'react';
 import { isJSDocLinkCode } from 'typescript';
-import { useFetchEventComments, useFetchEventFollowers, useFetchEventLikes } from '../../hooks/event';
+import { useFetchEventComments, useFetchEventFollowers } from '../../hooks/event';
 import { useEventLike } from '../../hooks/like';
 import { useActions } from '../../hooks/useActions';
 import { useAppSelector } from '../../hooks/useTypedSelector';
@@ -23,8 +23,9 @@ const EventItem: FC<EventItemProps> = ({ event }) => {
     const [followers, setFollowers] = useState<IFollower[]>([]);
     const fetchEventComments = useFetchEventComments(event.id);
     const fetchEventFollowers = useFetchEventFollowers(event.id);
-    const { likes, setEventLikes, setLiked, liked, isLiked, addEventLike, removeEventLike, updateLike } = useEventLike(event.id, user);
-    const { setCurEvent, setCurEventComments, setCurEventLikes, setCurEventFollowers } = useActions();
+
+    const { likes, setEventLikes, liked, updateLike } = useEventLike(event.id, user);
+    const { setCurEvent, setCurEventComments, setCurEventLikes, setCurEventFollowers, setIsLiked } = useActions();
 
     const setEventComments = async () => {
         const dbComments = await fetchEventComments();
@@ -40,13 +41,10 @@ const EventItem: FC<EventItemProps> = ({ event }) => {
         setCurEventComments(comments);
         setCurEventLikes(likes);
         setCurEventFollowers(followers);
+        console.log("liked", liked);
+        setIsLiked(liked);
     }
-    useMemo(() => {
-        setLiked(isLiked());
-    }, [likes]);
-
     useEffect(() => {
-        console.log(event.title, " => loaded");
         setEventLikes();
         setEventComments();
         setEventFolllowers();

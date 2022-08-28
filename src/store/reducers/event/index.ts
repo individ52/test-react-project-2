@@ -9,6 +9,7 @@ const initialState: EventState = {
     likes: [],
     followers: [],
     isLoadingEvent: false,
+    isLiked: false,
     error: "",
     success: ""
 }
@@ -25,6 +26,8 @@ export default function EventReducer(state: EventState = initialState, action: E
             return { ...state, followers: action.payload }
         case EventActionEnum.SET_IS_LOADING_EVENT:
             return { ...state, isLoadingEvent: action.payload }
+        case EventActionEnum.SET_IS_LIKED:
+            return { ...state, isLiked: action.payload }
         case EventActionEnum.SET_ERROR:
             return { ...state, error: action.payload }
         case EventActionEnum.SET_SUCCESS:

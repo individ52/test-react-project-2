@@ -1,8 +1,19 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { LikeService } from "../api/LikeService";
 import { IEventLike } from "../models/IEventLike";
 import { IUser } from "../models/IUser";
-import { useFetchEventLikes } from "./event";
+
+
+export const useFetchEventLikes = (eventId: number) => async (): Promise<IEventLike[]> => {
+    try {
+        const likes = await LikeService.getEventLikes();
+        if (likes) {
+            const filteredLikes = likes.data.filter(like => like.eventId === eventId);
+            return filteredLikes;
+        }
+    } catch (e) { }
+    return [];
+}
 
 const useAddEventLike = (eventId: number, username: string) => async () => {
     try {
@@ -24,9 +35,8 @@ const useRemoveEventLike = (eventId: number, username: string) => async () => {
             const allLikes = await LikeService.getEventLikes();
             if (allLikes && allLikes.data) {
                 const userLike = allLikes.data.find(like => like.eventId === eventId && like.username === username);
-                console.log("allLikes", allLikes, "userLike", userLike);
                 if (userLike) {
-                    LikeService.removeEventLike(userLike.id);
+                    await LikeService.removeEventLike(userLike.id);
                 }
             }
         }
@@ -60,6 +70,11 @@ export const useEventLike = (eventId: number, user: IUser) => {
     const removeEventLike = useRemoveEventLike(eventId, user.username);
     const updateLike = useUpdateLike(liked, removeEventLike, addEventLike, setEventLikes);
     const isLiked = useIsLiked(likes, user);
+
+    useMemo(() => {
+        setLiked(isLiked());
+    }, [likes]);
+
     return {
         liked,
         likes,
@@ -71,3 +86,17 @@ export const useEventLike = (eventId: number, user: IUser) => {
         isLiked
     };
 };
+
+
+// export const useEventLike = (user: IUser, likes: IEventLike[], dispatch: AppDispatch) => {
+//     const [liked, setLiked] = useState(false);
+//     const isLiked = useIsLiked(likes, user);
+//     useMemo(() => {
+//         setLiked(isLiked());
+//     }, [likes]);
+//     return {
+//         liked,
+//         setLiked,
+//         isLiked
+//     };
+// };

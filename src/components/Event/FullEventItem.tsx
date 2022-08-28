@@ -1,4 +1,6 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, useState, useEffect, useMemo } from 'react';
+import { useDispatch } from 'react-redux';
+import { useEventLike } from '../../hooks/like';
 import { useActions } from '../../hooks/useActions';
 import { useAppSelector } from '../../hooks/useTypedSelector';
 import { IEvent } from '../../models/IEvent';
@@ -12,9 +14,14 @@ interface FullEventItemProps {
 }
 
 const FullEventItem: FC<FullEventItemProps> = ({ }) => {
-    const { event, comments, followers, likes, success } = useAppSelector(state => state.event);
+    const { user } = useAppSelector(state => state.auth);
+    const { event, comments, followers, success, likes, isLiked } = useAppSelector(state => state.event);
     const [showEvent, setShowEvent] = useState(false);
     const { setCurEvent } = useActions();
+    const dispatch = useDispatch();
+    // const { isLiked, liked, setLiked } = useEventLike(event.id, user, likes);
+    const { updateEventLikes } = useActions();
+
     useEffect(() => {
         if (event) {
             setShowEvent(true);
@@ -39,9 +46,9 @@ const FullEventItem: FC<FullEventItemProps> = ({ }) => {
             <p className='author'>{event.authorUsername}</p>
             <div className="socials">
                 <div className="d-flex justify-content-between w-25">
-                    {/* <Like count={likes.length} uniq={event.id} active={liked} onClick={updateLike} /> */}
-                    {/* <Comment count={comments.length} uniq={event.id} /> */}
-                    {/* <FollowerIcon count={followers.length} uniq={event.id} /> */}
+                    <Like count={likes.length} uniq={event.id} active={isLiked} onClick={() => updateEventLikes(isLiked, event.id, user.username)} />
+                    <Comment count={comments.length} uniq={event.id} />
+                    <FollowerIcon count={followers.length} uniq={event.id} />
                 </div>
             </div>
         </div>

@@ -7,17 +7,6 @@ import { IEventLike } from "../models/IEventLike";
 import { IFollower } from "../models/IFollower";
 import { AppDispatch } from "../store";
 
-export const useFetchEventLikes = (eventId: number) => async (): Promise<IEventLike[]> => {
-    try {
-        const likes = await LikeService.getEventLikes();
-        if (likes) {
-            const filteredLikes = likes.data.filter(like => like.eventId === eventId);
-            return filteredLikes;
-        }
-    } catch (e) { }
-    return [];
-}
-
 export const useFetchEventComments = (eventId: number) => async (): Promise<IComment[]> => {
     try {
         const comments = await CommentService.getComments();

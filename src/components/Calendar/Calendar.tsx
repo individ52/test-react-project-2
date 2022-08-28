@@ -13,7 +13,7 @@ const Calendar: FC<CalendartProps> = ({ }) => {
     const [curDate, setCurDate] = useState<{ month: number, year: number, name: string }>();
     const [curDay, setCurDay] = useState<IDay>();
 
-    const { fetchEvents, setDate } = useActions();
+    const { fetchEvents, setDate, setCurEvent } = useActions();
 
 
     useEffect(() => {
@@ -55,6 +55,7 @@ const Calendar: FC<CalendartProps> = ({ }) => {
         if (curDay && curDay.date) {
             setDate(formateDate(curDay.date));
             fetchEvents(curDay.date);
+            setCurEvent({} as IEvent);
         }
     }, [curDay]);
 

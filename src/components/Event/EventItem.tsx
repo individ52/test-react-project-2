@@ -1,7 +1,7 @@
 import React, { FC, useState, useEffect, useMemo } from 'react';
 import { isJSDocLinkCode } from 'typescript';
 import { useFetchEventComments, useFetchEventFollowers, useFetchEventLikes } from '../../hooks/event';
-import { useAddEventLike, useRemoveEventLike } from '../../hooks/like';
+import { useEventLike } from '../../hooks/like';
 import { useActions } from '../../hooks/useActions';
 import { useAppSelector } from '../../hooks/useTypedSelector';
 import { IComment } from '../../models/IComment';
@@ -17,30 +17,15 @@ interface EventItemProps {
 }
 
 const EventItem: FC<EventItemProps> = ({ event }) => {
-    const [liked, setLiked] = useState(false);
     const { user } = useAppSelector(state => state.auth);
-    const { date } = useAppSelector(state => state.event);
-    const [likes, setLikes] = useState<IEventLike[]>([]);
+    const { date } = useAppSelector(state => state.events);
     const [comments, setComments] = useState<IComment[]>([]);
     const [followers, setFollowers] = useState<IFollower[]>([]);
-    const fetchEventLikes = useFetchEventLikes(event.id);
     const fetchEventComments = useFetchEventComments(event.id);
     const fetchEventFollowers = useFetchEventFollowers(event.id);
-    const addLike = useAddEventLike(event.id, user.username);
-    const removeLike = useRemoveEventLike(event.id, user.username);
+    const { likes, setEventLikes, setLiked, liked, isLiked, addEventLike, removeEventLike, updateLike } = useEventLike(event.id, user);
+    const { setCurEvent, setCurEventComments, setCurEventLikes, setCurEventFollowers } = useActions();
 
-    const { setEvent } = useActions();
-
-    const updateLike = async () => {
-        if (liked) await removeLike();
-        else await addLike();
-        await setEventLikes();
-    }
-    const setEventLikes = async () => {
-        const dbLikes = await fetchEventLikes();
-        // console.log("dbLikes", dbLikes);
-        setLikes(dbLikes);
-    }
     const setEventComments = async () => {
         const dbComments = await fetchEventComments();
         setComments(dbComments);
@@ -49,24 +34,19 @@ const EventItem: FC<EventItemProps> = ({ event }) => {
         const dbFollowers = await fetchEventFollowers();
         setFollowers(dbFollowers);
     }
-    const isLiked = (): boolean => {
-        const userLike = likes.find(userLike => userLike.username === user.username);
-        if (userLike) return true;
-        return false;
-    }
 
-    const setCurEvent = () => {
-        setEvent(event);
+    const setCurEventHandler = () => {
+        setCurEvent(event);
+        setCurEventComments(comments);
+        setCurEventLikes(likes);
+        setCurEventFollowers(followers);
     }
-
     useMemo(() => {
         setLiked(isLiked());
     }, [likes]);
 
-
-
     useEffect(() => {
-        // console.log(event.title, " => loaded");
+        console.log(event.title, " => loaded");
         setEventLikes();
         setEventComments();
         setEventFolllowers();
@@ -84,7 +64,7 @@ const EventItem: FC<EventItemProps> = ({ event }) => {
             </div>
             <hr />
             <div className='d-flex justify-content-between event-item-body m-0'>
-                <div onClick={setCurEvent}><h4>{event.title}</h4></div>
+                <div onClick={setCurEventHandler}><h4>{event.title}</h4></div>
             </div>
         </div>
     )

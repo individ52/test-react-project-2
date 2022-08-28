@@ -13,7 +13,7 @@ const Calendar: FC<CalendartProps> = ({ }) => {
     const [curDate, setCurDate] = useState<{ month: number, year: number, name: string }>();
     const [curDay, setCurDay] = useState<IDay>();
 
-    const { fetchEvents, setDate, setEvent } = useActions();
+    const { fetchEvents, setDate } = useActions();
 
 
     useEffect(() => {
@@ -54,7 +54,7 @@ const Calendar: FC<CalendartProps> = ({ }) => {
     useMemo(async () => {
         if (curDay && curDay.date) {
             setDate(formateDate(curDay.date));
-            setEvent({} as IEvent);
+            fetchEvents(curDay.date);
         }
     }, [curDay]);
 

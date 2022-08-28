@@ -16,6 +16,11 @@
       "date": "8/22/2022",
       "description": "Event descr",
       "title": "Event "
+    },
+    {
+      "username": "ivan",
+      "password": "ivan",
+      "id": 3
     }
   ],
   "followers": [],
@@ -47,6 +52,27 @@
       "description": "Event old 2",
       "title": "Event old 2",
       "id": 4
+    },
+    {
+      "authorUsername": "Leonid",
+      "date": "8/24/2022",
+      "description": "123123123123123 lorem 123123123",
+      "title": "NEw event",
+      "id": 5
+    },
+    {
+      "authorUsername": "Leonid",
+      "date": "8/28/2022",
+      "description": "New post for 28/08 New post for 28/08 New post for 28/08",
+      "title": "New post for 28/08",
+      "id": 6
+    },
+    {
+      "authorUsername": "Leonid",
+      "date": "8/28/2022",
+      "description": "asdasd",
+      "title": "asdasd",
+      "id": 7
     }
   ],
   "comments": [],
@@ -70,6 +96,21 @@
       "eventId": 1,
       "username": "Leonid",
       "id": 5
+    },
+    {
+      "eventId": 6,
+      "username": "ivan",
+      "id": 7
+    },
+    {
+      "eventId": 6,
+      "username": "Leonid",
+      "id": 11
+    },
+    {
+      "eventId": 7,
+      "username": "Leonid",
+      "id": 12
     }
   ],
   "comment-like": [],

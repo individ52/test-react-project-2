@@ -1,62 +1,48 @@
 import { IComment } from "../../../models/IComment";
 import { IEvent } from "../../../models/IEvent";
 import { IEventLike } from "../../../models/IEventLike";
+import { IFollower } from "../../../models/IFollower";
 
 export interface EventState {
-    dateEvents: IEvent[],
     event: IEvent,
-    date: string,
-    isLoadingEvent: boolean,
+    comments: IComment[],
+    likes: IEventLike[],
+    followers: IFollower[],
     success: string,
+    isLoadingEvent: boolean,
     error: string,
-    // isLoadingEvent: boolean,
-    // isLoadingEvents: boolean,
-    eventComments: IComment[],
-    isLoadingComments: boolean,
-    eventLikes: IEventLike[]
+
 }
 
 export enum EventActionEnum {
-    SET_DATE_EVENT = "SET_DATE_EVENT",
-    SET_DATE = "SET_DATE",
     SET_EVENT = "SET_EVENT",
-    SET_IS_LOADING_EVENT = "SET_IS_LOADING_EVENT",
-    SET_ERROR = "SET_ERROR",
+    SET_COMMENTS = "SET_COMMENTS",
+    SET_LIKES = "SET_LIKES",
+    SET_FOLLOWERS = "SET_FOLLOWERS",
     SET_SUCCESS = "SET_SUCCESS",
-    // SET_IS_LOADING_EVENT = "SET_IS_LOADING_EVENT",
-    // SET_IS_LOADING_EVENTS = "SET_IS_LOADING_EVENTS",
-    SET_EVENT_COMMENTS = "SET_EVENT_COMMENTS",
-    SET_IS_LOADING_COMMENTS = "SET_IS_LOADING_COMMENTS",
-    SET_EVENT_LIKES = "SET_EVENT_LIKES",
+    SET_IS_LOADING_EVENT = "SET_IS_LOADING_EVENT",
+    SET_ERROR = "SET_ERROR"
 }
 
-export interface SetDateAction {
-    type: EventActionEnum.SET_DATE,
-    payload: string
-}
 
-export interface SetDateEventAction {
-    type: EventActionEnum.SET_DATE_EVENT,
-    payload: IEvent[]
-}
 export interface SetEventAction {
     type: EventActionEnum.SET_EVENT,
     payload: IEvent
 }
 
-export interface SetEventCommentsAction {
-    type: EventActionEnum.SET_EVENT_COMMENTS,
+export interface SetCommentsAction {
+    type: EventActionEnum.SET_COMMENTS,
     payload: IComment[]
 }
 
-export interface SetEventLikesAction {
-    type: EventActionEnum.SET_EVENT_LIKES,
+export interface SetLikesAction {
+    type: EventActionEnum.SET_LIKES,
     payload: IEventLike[]
 }
 
-export interface SetIsLoadingCommentsAction {
-    type: EventActionEnum.SET_IS_LOADING_COMMENTS,
-    payload: boolean
+export interface SetFollowersAction {
+    type: EventActionEnum.SET_FOLLOWERS,
+    payload: IFollower[]
 }
 
 export interface SetSuccessAction {
@@ -73,19 +59,12 @@ export interface SetIsLoadingEventAction {
     type: EventActionEnum.SET_IS_LOADING_EVENT,
     payload: boolean
 }
-// export interface SetIsLoadingEventsAction {
-//     type: EventActionEnum.SET_IS_LOADING_EVENTS,
-//     payload: boolean
-// }
 
-export type EventActions =
-    SetDateEventAction |
-    SetEventAction |
-    SetEventCommentsAction |
-    SetEventLikesAction |
-    SetIsLoadingEventAction |
+
+export type EventActions = SetEventAction |
+    SetCommentsAction |
+    SetLikesAction |
+    SetFollowersAction |
     SetSuccessAction |
     SetErrorAction |
-    // SetIsLoadingEventsAction |
-    SetDateAction |
-    SetIsLoadingCommentsAction
+    SetIsLoadingEventAction

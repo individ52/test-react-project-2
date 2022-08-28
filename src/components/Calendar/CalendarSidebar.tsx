@@ -14,7 +14,8 @@ interface CalendarSidebarProps {
 }
 
 const CalendarSidebar: FC<CalendarSidebarProps> = ({ }) => {
-    const { dateEvents, date, error, success, isLoadingEvent, event: curEvent } = useAppSelector(state => state.event);
+    const { dateEvents, date, error, success, isLoadingEvent } = useAppSelector(state => state.events);
+    const { event: curEvent } = useAppSelector(state => state.event);
     const { user } = useAppSelector(state => state.auth);
     const [addModal, setAddModal] = useState<boolean>(false);
     const [formEvent, setFormEvent] = useState<IEvent>({} as IEvent);
@@ -33,11 +34,11 @@ const CalendarSidebar: FC<CalendarSidebarProps> = ({ }) => {
     }, [date])
 
     useMemo(() => {
-        // console.log("dateEvents is updated: ", dateEvents);
+        console.log("dateEvents is updated: ", dateEvents);
     }, [dateEvents]);
 
     useMemo(() => {
-        // console.log("isLoading", isLoadingEvent)
+        console.log("isLoading", isLoadingEvent)
     }, [isLoadingEvent]);
 
     const closeAddModal = () => {
@@ -71,15 +72,18 @@ const CalendarSidebar: FC<CalendarSidebarProps> = ({ }) => {
             <button className='btn btn-outline-secondary w-100 fs-4' onClick={openAddModal}>Add new Event</button>
             <div className='calendar-events-wrap'>
                 {isLoadingEvent && <Loader />}
-                <div className={["calendar-events", curEvent.id ? "" : "calendar-events-show"].join(" ")}>
-                    {!isLoadingEvent && dateEvents.length && !curEvent.id
-                        ? dateEvents.map(event => <EventItem event={event} />)
-                        : !curEvent.id && <h3>No events</h3>
-                    }
-                </div>
-                <div className="calendar-event">
-                    {curEvent.id && <FullEventItem />}
-                </div>
+                {!curEvent.id
+                    ? <div className={["calendar-events", curEvent.id ? "" : "calendar-events-show"].join(" ")}>
+                        {dateEvents.length
+                            ? dateEvents.map(event => <EventItem event={event} />)
+                            : <h3>No events</h3>
+                        }
+                    </div>
+                    : <div className="calendar-event">
+                        {curEvent.id && <FullEventItem />}
+                    </div>
+                }
+
             </div>
             <Modal show={addModal} onHide={closeAddModal} aria-labelledby="contained-modal-title-vcenter" centered size="lg" >
                 <Modal.Header closeButton >

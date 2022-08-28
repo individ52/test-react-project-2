@@ -2,6 +2,9 @@ import React, { FC, useState, useEffect } from 'react';
 import { useActions } from '../../hooks/useActions';
 import { useAppSelector } from '../../hooks/useTypedSelector';
 import { IEvent } from '../../models/IEvent';
+import Comment from '../UI/icons/Comment/Comment';
+import FollowerIcon from '../UI/icons/Followers/followers';
+import Like from '../UI/icons/Like/Like';
 import "./Event.css";
 
 interface FullEventItemProps {
@@ -9,9 +12,9 @@ interface FullEventItemProps {
 }
 
 const FullEventItem: FC<FullEventItemProps> = ({ }) => {
-    const { event } = useAppSelector(state => state.event);
+    const { event, comments, followers, likes, success } = useAppSelector(state => state.event);
     const [showEvent, setShowEvent] = useState(false);
-    const { setEvent } = useActions();
+    const { setCurEvent } = useActions();
     useEffect(() => {
         if (event) {
             setShowEvent(true);
@@ -19,9 +22,10 @@ const FullEventItem: FC<FullEventItemProps> = ({ }) => {
     }, [event]);
 
     const goToFullEvents = () => {
-        setEvent({} as IEvent);
         setShowEvent(false);
-
+        setTimeout(() => {
+            setCurEvent({} as IEvent);
+        }, 1000);
     }
 
     return (
@@ -33,6 +37,13 @@ const FullEventItem: FC<FullEventItemProps> = ({ }) => {
             <hr />
             <p>{event.description}</p>
             <p className='author'>{event.authorUsername}</p>
+            <div className="socials">
+                <div className="d-flex justify-content-between w-25">
+                    {/* <Like count={likes.length} uniq={event.id} active={liked} onClick={updateLike} /> */}
+                    {/* <Comment count={comments.length} uniq={event.id} /> */}
+                    {/* <FollowerIcon count={followers.length} uniq={event.id} /> */}
+                </div>
+            </div>
         </div>
     )
 }

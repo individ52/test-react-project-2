@@ -57,7 +57,7 @@ const FormWrap: FC<FormWrapProps> = ({ children, onSubmitAction, isLoading, erro
     }, [isLoading, error, success]);
 
     return (
-        <Form noValidate validated={validated} onSubmit={handleSubmit}>
+        <Form noValidate validated={validated} onSubmit={handleSubmit} >
             {alertData.message !== "" && <Alert key={alertData.variant} variant={alertData.variant} className="mt-3">{alertData.message}</Alert>}
             {children}
         </Form>

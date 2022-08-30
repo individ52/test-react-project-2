@@ -22,3 +22,17 @@
     opacity: 1;
     transition: 1s all;
 }
+
+.comment-event-item {
+    position: relative;
+}
+
+.cross-wrap {
+    position: absolute;
+    display: inline-block;
+    width: 0;
+    padding: 0;
+    right: 7%;
+    top: 7%;
+    z-index: 100;
+}

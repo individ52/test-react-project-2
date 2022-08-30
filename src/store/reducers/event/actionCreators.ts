@@ -1,11 +1,13 @@
 import { AppDispatch } from "../..";
 import { LikeService } from "../../../api/LikeService";
+import { CommentService } from "../../../api/CommentService";
 import { useAppSelector } from "../../../hooks/useTypedSelector";
 import { IComment } from "../../../models/IComment";
 import { IEvent } from "../../../models/IEvent";
 import { IEventLike } from "../../../models/IEventLike";
 import { IFollower } from "../../../models/IFollower";
 import { EventActionEnum, SetCommentsAction, SetErrorAction, SetEventAction, SetFollowersAction, SetIsLikedAction, SetIsLoadingEventAction, SetLikesAction, SetSuccessAction } from "./type";
+import { useFetchEventComments } from "../../../hooks/event";
 
 export const EventActionCreators = {
     setCurEvent: (payload: IEvent): SetEventAction => ({ type: EventActionEnum.SET_EVENT, payload }),
@@ -66,5 +68,32 @@ export const EventActionCreators = {
         if (liked) dispatch(EventActionCreators.removeEventLikes(eventId, username));
         else dispatch(EventActionCreators.addEventLikes(eventId, username));
         dispatch(EventActionCreators.fetchEventLikes(eventId, username));
-    }
+    },
+    fetchEventComments: (eventId: number) => async (dispatch: AppDispatch) => {
+        try {
+            const comments = await CommentService.getComments();
+            if (comments) {
+                const filteredComments = comments.data.filter(comment => comment.eventId === eventId);
+                dispatch(EventActionCreators.setCurEventComments(filteredComments));
+            }
+        } catch (e) {
+            console.log("error with fetching likes")
+        }
+    },
+    addEventComment: (comment: IComment) => async (dispatch: AppDispatch) => {
+        try {
+            await CommentService.addComment(comment);
+            dispatch(EventActionCreators.fetchEventComments(comment.eventId));
+        } catch (e) {
+            console.log("error with adding comment")
+        }
+    },
+    removeEventComment: (comment: IComment) => async (dispatch: AppDispatch) => {
+        try {
+            await CommentService.removeComment(comment.id);
+            dispatch(EventActionCreators.fetchEventComments(comment.eventId));
+        } catch (e) {
+            console.log("error with adding comment")
+        }
+    },
 }

@@ -1,7 +1,7 @@
 import React, { FC, useState, useEffect, useMemo } from 'react';
 import { isJSDocLinkCode } from 'typescript';
 import { useFetchEventComments, useFetchEventFollowers } from '../../hooks/event';
-import { useEventLike } from '../../hooks/like';
+import { useEventLike } from '../../hooks/eventLike';
 import { useActions } from '../../hooks/useActions';
 import { useAppSelector } from '../../hooks/useTypedSelector';
 import { IComment } from '../../models/IComment';
@@ -41,14 +41,13 @@ const EventItem: FC<EventItemProps> = ({ event }) => {
         setCurEventComments(comments);
         setCurEventLikes(likes);
         setCurEventFollowers(followers);
-        console.log("liked", liked);
         setIsLiked(liked);
     }
     useEffect(() => {
         setEventLikes();
         setEventComments();
         setEventFolllowers();
-    }, [date]);
+    }, [date, comments]);
 
     return (
         <div className='row event-item'>

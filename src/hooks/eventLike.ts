@@ -14,7 +14,6 @@ export const useFetchEventLikes = (eventId: number) => async (): Promise<IEventL
     } catch (e) { }
     return [];
 }
-
 const useAddEventLike = (eventId: number, username: string) => async () => {
     try {
         if (username) {
@@ -28,7 +27,6 @@ const useAddEventLike = (eventId: number, username: string) => async () => {
         console.log("error add like");
     }
 }
-
 const useRemoveEventLike = (eventId: number, username: string) => async () => {
     try {
         if (username) {
@@ -44,7 +42,6 @@ const useRemoveEventLike = (eventId: number, username: string) => async () => {
         console.log("error add like");
     }
 }
-
 const useUpdateLike = (liked: boolean, removeLike: () => void, addLike: () => void, setEventLikes: () => void) => async () => {
     if (liked) await removeLike();
     else await addLike();
@@ -55,8 +52,6 @@ const useIsLiked = (likes: IEventLike[], user: IUser) => (): boolean => {
     if (userLike) return true;
     return false;
 }
-
-
 export const useEventLike = (eventId: number, user: IUser) => {
     const fetchEventLikes = useFetchEventLikes(eventId);
     const [likes, setLikes] = useState<IEventLike[]>([]);
@@ -86,17 +81,3 @@ export const useEventLike = (eventId: number, user: IUser) => {
         isLiked
     };
 };
-
-
-// export const useEventLike = (user: IUser, likes: IEventLike[], dispatch: AppDispatch) => {
-//     const [liked, setLiked] = useState(false);
-//     const isLiked = useIsLiked(likes, user);
-//     useMemo(() => {
-//         setLiked(isLiked());
-//     }, [likes]);
-//     return {
-//         liked,
-//         setLiked,
-//         isLiked
-//     };
-// };

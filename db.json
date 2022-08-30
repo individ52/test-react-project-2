@@ -131,12 +131,6 @@
       "body": "Second Leonid comment",
       "eventId": 10,
       "id": 6
-    },
-    {
-      "authorUsername": "Ivan",
-      "body": "Ivan comment",
-      "eventId": 10,
-      "id": 7
     }
   ],
   "event-like": [
@@ -209,12 +203,12 @@
       "id": 3
     },
     {
-      "commentId": 6,
+      "commentId": 5,
       "username": "Ivan",
       "id": 4
     },
     {
-      "commentId": 5,
+      "commentId": 6,
       "username": "Ivan",
       "id": 5
     }

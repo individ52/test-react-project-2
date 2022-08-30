@@ -44,7 +44,9 @@ export const useCommentLike = (comment: IComment, user: IUser) => {
         else addCommentLike();
         setLiked(!liked);
     }
-    fetchCommentLikes();
+    useEffect(() => {
+        fetchCommentLikes();
+    }, []);
     return {
         liked,
         commentLikes,

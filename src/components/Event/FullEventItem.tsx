@@ -49,7 +49,7 @@ const FullEventItem: FC<FullEventItemProps> = ({ }) => {
             <p className='author'>{event.authorUsername}</p>
             <div className="socials d-flex justify-content-end">
                 <div className="d-flex justify-content-between w-25">
-                    <Like count={likes.length} uniq={event.id} active={isLiked} onClick={() => updateEventLikes(isLiked, event.id, user.username)} />
+                    <Like count={likes.length} uniq={event.id} elementsPopup={likes.map(like => like.username)} active={isLiked} onClick={() => updateEventLikes(isLiked, event.id, user.username)} />
                     <Comment count={comments.length} uniq={event.id} />
                     <FollowerIcon count={followers.length} uniq={event.id} />
                 </div>

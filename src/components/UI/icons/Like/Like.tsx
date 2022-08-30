@@ -28,7 +28,7 @@ const Like: FC<SocialIconProps> = ({ uniq, count = 0, active, onClick, elementsP
                 </svg>
                 <div className="comment-icon-text text-center fw-bolder lh-1 fs-5">{count}</div>
             </div>
-            {elementsPopup && <PopupBox key={uniq} uniq={uniq} show={showPopup} elements={elementsPopup} />}
+            {showPopup && elementsPopup && <PopupBox key={uniq} uniq={uniq} show={showPopup} elements={elementsPopup} onMouseEnter={() => setShowPopup(true)} onMouseLeave={() => setShowPopup(false)} />}
         </div>
     )
 }

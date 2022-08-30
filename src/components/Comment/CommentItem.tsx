@@ -26,7 +26,7 @@ const CommentItem: FC<CommentItemProps> = ({ comment }) => {
             <div className='d-flex justify-content-between comment-event-item-body m-0'>
                 <div className="comment-event-item-author text-start"><h6>Author: {comment.authorUsername}</h6></div>
                 <div className="d-flex justify-content-end w-25 p-1">
-                    <Like count={commentLikes.length} uniq={comment.id} active={liked} onClick={updateCommentLike} />
+                    <Like elementsPopup={commentLikes.map(com => com.username)} count={commentLikes.length} uniq={comment.id} active={liked} onClick={updateCommentLike} />
                 </div>
             </div>
             {/* <hr /> */}

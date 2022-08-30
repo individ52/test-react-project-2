@@ -47,14 +47,14 @@ const EventItem: FC<EventItemProps> = ({ event }) => {
         setEventLikes();
         setEventComments();
         setEventFolllowers();
-    }, [date, comments]);
+    }, [date]);
 
     return (
         <div className='row event-item'>
             <div className='d-flex justify-content-between event-item-body m-0'>
                 <div className="event-item-author text-start"><h5>{event.authorUsername}</h5></div>
                 <div className="d-flex justify-content-between w-25">
-                    <Like count={likes.length} uniq={event.id} active={liked} onClick={updateLike} />
+                    <Like count={likes.length} elementsPopup={likes.map(like => like.username)} uniq={event.id} active={liked} onClick={updateLike} />
                     <Comment count={comments.length} uniq={event.id} />
                     <FollowerIcon count={followers.length} uniq={event.id} />
                 </div>

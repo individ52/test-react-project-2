@@ -9,15 +9,16 @@
     padding: 5px 10px;
     border-radius: 5px;
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 75px;
+    right: 135px;
     transform: translate(98%, -64%);
     transition: opacity .25s ease-in-out;
     height: 130px;
-    height: 110px;
+    width: 100px;
     display: flex;
     flex-direction: column;
     justify-content: start;
+    z-index: 100;
 
     &-show {
         opacity: 1;
@@ -25,17 +26,19 @@
 
     p {
         text-align: center;
+        margin: 0;
+        padding: 0;
     }
 
     &:before {
         position: absolute;
         z-index: -1;
         content: "";
-        bottom: 3px;
-        right: 98%;
+        top: 3px;
+        left: 98%;
         width: 10px;
         height: 20px;
-        border-right: solid 15px rgb(56, 56, 56);
+        border-left: solid 15px rgb(56, 56, 56);
         border-bottom: solid 15px transparent;
         border-top: solid 15px transparent;
     }
